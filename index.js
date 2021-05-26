@@ -1,38 +1,44 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
-const generateEmployeeHtml = require('./src/generateEmployeeHtml');
+// const generateEmployeeHtml = require('./src/generateEmployeeHtml');
 
 // Array of questions for user input
-const questions = [
+const managerQuestions = [
   {
     type: 'input',
     name: 'managerName',
-    message: `What is your team manager's name:`,
+    message: `What is the team manager's name:`,
   },
   {
     type: 'input',
     name: 'managerEmployeeId',
-    message: `What is your team manager's employee ID:`,
+    message: `What is the team manager's employee ID:`,
   },
   {
     type: 'input',
     name: 'managerEmailAddress',
-    message: `What is your manager's email address:`,
+    message: `What is the team manager's email address:`,
   },
   {
     type: 'input',
     name: 'managerOfficeNumber',
-    message: `What is your manager's office number:`,
+    message: `What is the team manager's office number:`,
   },
+];
+
+const loopQuestion = [
   {
-    type: 'checkbox',
-    name: 'employeeType',
-    message: 'Please select the type of employee you would like to add:',
-    choices: ['engineer', 'intern'],
-  },
+    type: 'list',
+    name: 'whatToDoNext',
+    message: 'What would you like to do next?',
+    choices: ['Add Engineer', 'Add Intern', 'Generate Team Profile'],
+  }
+];
+
+const engineerQuestions = [
   {
-    type: 'iput',
+    type: 'input',
     name: 'engineerName',
     message: `What is the engineer's name:`,
   },
@@ -51,8 +57,11 @@ const questions = [
     name: 'engineerGithub',
     message: `What is the engineer's GitHub username:`,
   },
+];
+
+const internQuestions = [
   {
-    type: 'iput',
+    type: 'input',
     name: 'internName',
     message: `What is the intern's name:`,
   },
@@ -80,16 +89,42 @@ function writeToFile(fileName, data) {
   );
 }
 
-const promptUser = () => {
-  return inquirer.prompt(questions);
-};
-
 // Create a function to initialize app
-const init = () => {
-  promptUser()
-    .then(data => writeToFile(data.fileName, generateEmployeeHtml(data)))
-    .catch((err) => console.error(err));
+const init = async () => {
+  const engineerAnswers = [];
+  const internAnswers = [];
+
+  const managerAnswer = await inquirer.prompt(managerQuestions);
+  console.log('initialAnswer:', JSON.stringify(managerAnswer, null, 2));
+  let loopAnswer;
+
+  do {
+    loopAnswer = await inquirer.prompt(loopQuestion);
+    console.log('loopAnswer:', JSON.stringify(loopAnswer, null, 2));
+
+    if (loopAnswer.whatToDoNext === 'Add Engineer') {
+      const engineerAnswer = await inquirer.prompt(engineerQuestions);
+      console.log('engineerAnswer:', JSON.stringify(engineerAnswer, null, 2));
+      engineerAnswers.push(engineerAnswer);
+      
+    } else if (loopAnswer.whatToDoNext === 'Add Intern') {
+      const internAnswer = await inquirer.prompt(internQuestions);
+      console.log('internAnswer:', JSON.stringify(internAnswer, null, 2));
+      internAnswers.push(internAnswer);
+    }
+  } while (loopAnswer.whatToDoNext !== 'Generate Team Profile');
+
+  console.log('Ready to Generate Team Profile!');
+  console.log('managerAnswer:\n', JSON.stringify(managerAnswer, null, 2));
+  console.log('engineerAnswers:\n', JSON.stringify(engineerAnswers, null, 2));
+  console.log('internAnswers:\n', JSON.stringify(internAnswers, null, 2));
+
+  // promptUser()
+  //   .then(data => writeToFile(data.fileName, generateEmployeeHtml(data)))
+  //   .catch((err) => console.error(err));
 };
 
 // Function to initialize app
-init();
+init()
+  .then(() => console.log('All done!'))
+  .catch(err => console.error(`We had an Error: "${err}"`));
