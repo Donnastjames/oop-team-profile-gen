@@ -87,21 +87,13 @@ const internQuestions = [
   },
 ];
 
-// Create a function to write the Html file
-function writeToFile(fileName, data) {
-  fs.writeToFile(fileName, data, err =>
-    err ? console.error(err) : console.log(`Successfully created "${filename}"`)
-  );
-}
-
 // Create a function to initialize app
 const init = async () => {
-  const managerAnswers = [];
   const engineerAnswers = [];
   const internAnswers = [];
 
   const managerAnswer = await inquirer.prompt(managerQuestions);
-  console.log('initialAnswer:', JSON.stringify(managerAnswer, null, 2));
+  console.log('managerAnswer:', JSON.stringify(managerAnswer, null, 2));
   let loopAnswer;
 
   do {
@@ -125,12 +117,12 @@ const init = async () => {
   console.log('engineerAnswers:\n', JSON.stringify(engineerAnswers, null, 2));
   console.log('internAnswers:\n', JSON.stringify(internAnswers, null, 2));
 
-  const officeManager = managerAnswers.map(answer => new Manager(
-    answer.managerName,
-    answer.managerID,
-    answer.managerEmail,
-    answer.managerOfficeNumber
-  ));
+  const officeManager = new Manager(
+    managerAnswer.managerName,
+    managerAnswer.managerId,
+    managerAnswer.managerEmail,
+    managerAnswer.managerOfficeNumber,
+  );
   
   const engineers = engineerAnswers.map(answer => new Engineer(
     answer.engineerName,
@@ -141,18 +133,128 @@ const init = async () => {
 
   const interns = internAnswers.map(answer => new Intern(
     answer.internName,
-    answer.internID,
+    answer.internId,
     answer.internEmail,
     answer.internSchool,
   ));
-    
-};
 
-// Function to initialize app
-init()
-  .then(data => writeToFile(data.fileName, generateEmployeeHtml(data)))
-  .catch((err) => console.error(err));
+  return {
+    officeManager,
+    engineers,
+    interns,
+  };
+};
 
 // Function to generate the Html
 
+function generateEmployeeHtml(data) {
+  const { officeManager, engineers, interns } = data;
 
+  let engineerCards = '';
+
+  for (let i = 0; i < engineers.length; i++) {
+    const engineerCard =
+`
+<div class="card bg-light mb3" style="max-width: 18rem;">
+  <div class="card-header lead border-bottom-0" style="background: lightblue">${engineers[i].name}</div>
+  <div class="card-header" style="background: lightblue">Engineer</div>
+  <div class="card-body">
+    <p class="card-text">ID: ${engineers[i].id}</p>
+    <p class="card-text">Email: ${engineers[i].email}</p>
+    <p class="card-text">Github Profile: ${engineers[i].github}</p>
+    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  </div>
+</div>
+`
+    engineerCards += engineerCard;
+  }
+
+  let internCards = '';
+
+  for (let i = 0; i < interns.length; i ++) {
+    const internCard = 
+`
+<div class="card bg-light mb3" style="max-width: 18rem;">
+  <div class="card-header lead border-bottom-0" style="background: lightblue">${interns[i].name}</div>
+  <div class="card-header" style="background: lightblue">Intern</div>
+  <div class="card-body">
+    <p class="card-text">ID: ${interns[i].id}</p>
+    <p class="card-text">Email: ${interns[i].email}</p>
+    <p class="card-text">Github Profile: ${interns[i].school}</p>
+    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  </div>
+</div>
+`
+    internCards += internCard;
+  }
+
+  const generatedHtml =
+`<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+  <link rel="stylesheet" href="./style.css">
+  <title>OOP_Team_Profile_Generator</title>
+</head>
+<body>
+
+  <header class="row mb-2 bg-secondary text-white" style="height: 100px">
+    <div class="container-sm text-center">
+      <h1 style="margin-top: revert">My Team</h1>
+    </div>
+  </header>
+
+  <main>
+    <div class="container">
+      <div class="card-deck">
+        <div class="col mb-3">
+          <div class="card bg-light mb3" style="max-width: 18rem;">
+            <div class="card-header lead border-bottom-0" style="background: lightblue">${officeManager.name}</div>
+            <div class="card-header" style="background: lightblue">Manager</div>
+            <div class="card-body">
+              <p class="card-text">ID: ${officeManager.id}</p>
+              <p class="card-text">Email: ${officeManager.email}: </p>
+              <p class="card-text">Office Number: ${officeManager.officeNumber}: </p>
+              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+            </div>
+          </div>
+        </div>
+
+        <div class="col mb-3">
+          ${engineerCards}
+        </div>
+
+        <div class="col mb-3">
+          ${internCards}
+        </div>
+
+      </div>
+    </div>
+  </main>
+      
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+  
+</body>
+</html>
+`;
+
+  return generatedHtml;
+}
+
+function writeToFile(fileName, data) {
+  fs.writeFile(fileName, data, err =>
+      err ? console.error(err) : console.log(`Successfully created "${fileName}"`)
+    );
+}
+
+// Function to initialize app
+init()
+  .then(data => writeToFile('index.html', generateEmployeeHtml(data)))
+  .catch(err => console.error(err));
