@@ -153,18 +153,18 @@ function generateEmployeeHtml(data) {
   let engineerCards = '';
 
   for (let i = 0; i < engineers.length; i++) {
-    const engineerCard =
-`
-<div class="card bg-light mb3" style="max-width: 18rem;">
-  <div class="card-header lead border-bottom-0" style="background: lightblue">${engineers[i].name}</div>
-  <div class="card-header" style="background: lightblue">Engineer</div>
-  <div class="card-body">
-    <p class="card-text">ID: ${engineers[i].id}</p>
-    <p class="card-text">Email: ${engineers[i].email}</p>
-    <p class="card-text">Github Profile: ${engineers[i].github}</p>
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-  </div>
-</div>
+    const engineerCard = `
+            <div class="card bg-light mb3" style="max-width: 18rem;">
+              <div class="card-header lead border-bottom-0" style="background: lightblue">${engineers[i].name}</div>
+              <div class="card-header" style="background: lightblue">Engineer</div>
+              <div class="card-body">
+                <p class="card-text">ID: ${engineers[i].id}</p>
+                <p class="card-text">Email: ${engineers[i].email}</p>
+                <p class="card-text">Github Profile: ${engineers[i].github}</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+            <br>
 `
     engineerCards += engineerCard;
   }
@@ -172,18 +172,18 @@ function generateEmployeeHtml(data) {
   let internCards = '';
 
   for (let i = 0; i < interns.length; i ++) {
-    const internCard = 
-`
-<div class="card bg-light mb3" style="max-width: 18rem;">
-  <div class="card-header lead border-bottom-0" style="background: lightblue">${interns[i].name}</div>
-  <div class="card-header" style="background: lightblue">Intern</div>
-  <div class="card-body">
-    <p class="card-text">ID: ${interns[i].id}</p>
-    <p class="card-text">Email: ${interns[i].email}</p>
-    <p class="card-text">Github Profile: ${interns[i].school}</p>
-    <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
-  </div>
-</div>
+    const internCard = `
+            <div class="card bg-light mb3" style="max-width: 18rem;">
+              <div class="card-header lead border-bottom-0" style="background: lightblue">${interns[i].name}</div>
+              <div class="card-header" style="background: lightblue">Intern</div>
+              <div class="card-body">
+                <p class="card-text">ID: ${interns[i].id}</p>
+                <p class="card-text">Email: ${interns[i].email}</p>
+                <p class="card-text">School: ${interns[i].school}</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
+            </div>
+            <br>
 `
     internCards += internCard;
   }
