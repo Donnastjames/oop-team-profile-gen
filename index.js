@@ -189,61 +189,61 @@ function generateEmployeeHtml(data) {
   }
 
   const generatedHtml =
-`<!DOCTYPE html>
-<html lang="en">
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
-  <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-  <link rel="stylesheet" href="./style.css">
-  <title>OOP_Team_Profile_Generator</title>
-</head>
-<body>
-
-  <header class="row mb-2 bg-secondary text-white" style="height: 100px">
-    <div class="container-sm text-center">
-      <h1 style="margin-top: revert">My Team</h1>
-    </div>
-  </header>
-
-  <main>
-    <div class="container">
-      <div class="card-deck">
-        <div class="col mb-3">
-          <div class="card bg-light mb3" style="max-width: 18rem;">
-            <div class="card-header lead border-bottom-0" style="background: lightblue">${officeManager.name}</div>
-            <div class="card-header" style="background: lightblue">Manager</div>
-            <div class="card-body">
-              <p class="card-text">ID: ${officeManager.id}</p>
-              <p class="card-text">Email: ${officeManager.email}: </p>
-              <p class="card-text">Office Number: ${officeManager.officeNumber}: </p>
-              <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+  `<!DOCTYPE html>
+  <html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <link rel="stylesheet" href="./style.css">
+    <title>OOP_Team_Profile_Generator</title>
+  </head>
+  <body>
+  
+    <header class="row mb-2 bg-secondary text-white" style="height: 100px">
+      <div class="container-sm text-center">
+        <h1 style="margin-top: revert">My Team</h1>
+      </div>
+    </header>
+  
+    <main>
+      <div class="container">
+        <div class="card-deck">
+          <div class="col mb-3">
+            <div class="card bg-light mb3" style="max-width: 18rem;">
+              <div class="card-header lead border-bottom-0" style="background: lightblue">${officeManager.name}</div>
+              <div class="card-header" style="background: lightblue">Manager</div>
+              <div class="card-body">
+                <p class="card-text">ID: ${officeManager.id}</p>
+                <p class="card-text">Email: ${officeManager.email}</p>
+                <p class="card-text">Office Number: ${officeManager.officeNumber}</p>
+                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+              </div>
             </div>
           </div>
-        </div>
-
-        <div class="col mb-3">
-          ${engineerCards}
-        </div>
-
-        <div class="col mb-3">
-          ${internCards}
-        </div>
-
-      </div>
-    </div>
-  </main>
-      
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+        
+          <div class="col mb-3">
+            ${engineerCards}
+          </div>
   
-</body>
-</html>
-`;
+          <div class="col mb-3">
+            ${internCards}
+          </div>
+  
+        </div>
+      </div>
+    </main>
+        
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.1/umd/popper.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.5.0/js/bootstrap.min.js"></script>
+    
+  </body>
+  </html>
+  `;
 
   return generatedHtml;
 }
