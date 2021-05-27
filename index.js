@@ -1,6 +1,11 @@
 // Packages needed for this application
 const inquirer = require('inquirer');
 const fs = require('fs');
+const Engineer = require('./lib/Engineer');
+const Manager = require('./lib/Manager');
+const Intern = require('./lib/Intern');
+
+
 // const generateEmployeeHtml = require('./src/generateEmployeeHtml');
 
 // Array of questions for user input
@@ -12,12 +17,12 @@ const managerQuestions = [
   },
   {
     type: 'input',
-    name: 'managerEmployeeId',
+    name: 'managerId',
     message: `What is the team manager's employee ID:`,
   },
   {
     type: 'input',
-    name: 'managerEmailAddress',
+    name: 'managerEmail',
     message: `What is the team manager's email address:`,
   },
   {
@@ -91,6 +96,7 @@ function writeToFile(fileName, data) {
 
 // Create a function to initialize app
 const init = async () => {
+  const managerAnswers = [];
   const engineerAnswers = [];
   const internAnswers = [];
 
@@ -119,12 +125,34 @@ const init = async () => {
   console.log('engineerAnswers:\n', JSON.stringify(engineerAnswers, null, 2));
   console.log('internAnswers:\n', JSON.stringify(internAnswers, null, 2));
 
-  // promptUser()
-  //   .then(data => writeToFile(data.fileName, generateEmployeeHtml(data)))
-  //   .catch((err) => console.error(err));
+  const officeManager = managerAnswers.map(answer => new Manager(
+    answer.managerName,
+    answer.managerID,
+    answer.managerEmail,
+    answer.managerOfficeNumber
+  ));
+  
+  const engineers = engineerAnswers.map(answer => new Engineer(
+    answer.engineerName,
+    answer.engineerId,
+    answer.engineerEmail,
+    answer.engineerGithub,
+  ));
+
+  const interns = internAnswers.map(answer => new Intern(
+    answer.internName,
+    answer.internID,
+    answer.internEmail,
+    answer.internSchool,
+  ));
+    
 };
 
 // Function to initialize app
 init()
-  .then(() => console.log('All done!'))
-  .catch(err => console.error(`We had an Error: "${err}"`));
+  .then(data => writeToFile(data.fileName, generateEmployeeHtml(data)))
+  .catch((err) => console.error(err));
+
+// Function to generate the Html
+
+
