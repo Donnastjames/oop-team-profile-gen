@@ -159,9 +159,12 @@ function generateEmployeeHtml(data) {
               <div class="card-header" style="background: lightblue">Engineer</div>
               <div class="card-body">
                 <p class="card-text">ID: ${engineers[i].id}</p>
-                <p class="card-text">Email: ${engineers[i].email}</p>
-                <p class="card-text">Github Profile: ${engineers[i].github}</p>
-                <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                <p class="card-text">Email address: 
+                <a href="mailto:${engineers[i].email}" alt="email address">${engineers[i].email}</a>
+                </p>
+                <p class="card-text">GitHub: 
+                <a href="${engineers[i].github}" target="_blank" rel="noopener noreferrer" alt="github">${engineers[i].github}</a>
+                </p>
               </div>
             </div>
             <br>
@@ -178,7 +181,9 @@ function generateEmployeeHtml(data) {
               <div class="card-header" style="background: lightblue">Intern</div>
               <div class="card-body">
                 <p class="card-text">ID: ${interns[i].id}</p>
-                <p class="card-text">Email: ${interns[i].email}</p>
+                <p class="card-text">Email address: 
+                <a href="mailto:${interns[i].email}" alt="email address">${interns[i].email}</a>
+                </p>
                 <p class="card-text">School: ${interns[i].school}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               </div>
@@ -218,7 +223,9 @@ function generateEmployeeHtml(data) {
               <div class="card-header" style="background: lightblue">Manager</div>
               <div class="card-body">
                 <p class="card-text">ID: ${officeManager.id}</p>
-                <p class="card-text">Email: ${officeManager.email}</p>
+                <p class="card-text">Email address: 
+                <a href="mailto:${officeManager.email}" alt="email address">${officeManager.email}</a>
+                </p>
                 <p class="card-text">Office Number: ${officeManager.officeNumber}</p>
                 <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
               </div>
