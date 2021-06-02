@@ -4,7 +4,7 @@ describe("Engineer", () => {
   it("can be constructed with a name, id, email and github property", () => {
     const engineer = new Engineer("  Laura Ingalls  ", "  2234  ", "  laura.ingalls@email.com   ", "  github.com/lauraingalls ");
 
-    // Verify that the new Employee has the correct properties
+    // Verify that the new Engineer has the correct properties
     expect(engineer.name).toEqual("Laura Ingalls");
     expect(engineer.id).toEqual("2234");
     expect(engineer.email).toEqual("laura.ingalls@email.com");
