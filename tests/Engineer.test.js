@@ -22,7 +22,7 @@ describe("Engineer", () => {
     expect(engineer.getGithub()).toEqual("github.com/lauraingalls");
   });
 
-  it("getRole() returns the string Engineer", () => {
+  it("getRole() returns the string 'Engineer'", () => {
     const engineer = new Engineer("Laura Ingalls", "2234", "laura.ingalls@email.com", "github.com/lauraingalls", "Engineer");
     expect(engineer.getRole()).toEqual("Engineer");
   });

@@ -11,8 +11,8 @@ describe("Manager", () => {
     expect(manager.officeNumber).toEqual("12");
   });
 
-  it("should throw an error for invalid email parameter", () => {
-    const cb = () => new Manager("Gina Smith", "B-88-99a", null, "12");
+  it("should throw an error for invalid officeNumber parameter", () => {
+    const cb = () => new Manager("Gina Smith", "B-88-99a", "gina.smith@email.com", null);
     const err = new Error("Cannot read property 'trim' of null");
     expect(cb).toThrowError(err);
   });
@@ -22,7 +22,7 @@ describe("Manager", () => {
     expect(manager.getOfficeNumber()).toEqual("12");
   });
 
-  it("getRole() returns expected string Manager", () => {
+  it("getRole() returns expected string 'Manager'", () => {
     const manager = new Manager("Gina Smith", "B-88-99a", "gina.smith@email.com", "12", "Manager");
     expect(manager.getRole()).toEqual("Manager");
   });
