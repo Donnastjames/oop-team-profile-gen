@@ -26,5 +26,4 @@ describe("Manager", () => {
     const manager = new Manager("Gina Smith", "B-88-99a", "gina.smith@email.com", "12", "Manager");
     expect(manager.getRole()).toEqual("Manager");
   });
-
 });
