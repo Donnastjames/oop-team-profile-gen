@@ -379,5 +379,5 @@ function writeToFile(fileName, data) {
 
 // Function to initialize app
 init()
-  .then(data => writeToFile('index.html', generateEmployeeHtml(data)))
+  .then(data => writeToFile('./dist/index.html', generateEmployeeHtml(data)))
   .catch(err => console.error(err));
