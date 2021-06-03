@@ -28,6 +28,8 @@ Type the following from a terminal window:
 * Inquirer
 * Jest
 
+## Mock up
+![Screenshot of application](./assets/Team-Profile-screenshot.png)
 ### Link to instructional videos
 [Instructional video of application in use](https://drive.google.com/file/d/1PBp91UFJTrDMEB4LkvR__Y4YlQxygmPK/view)
 
