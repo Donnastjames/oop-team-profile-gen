@@ -206,6 +206,12 @@ const init = async () => {
       console.log('usedEmployeeIds:', usedEmployeeIds);
       usedEmployeeEmails.push(engineerAnswer.engineerEmail.toLowerCase());
       console.log('usedEmployeeEmails:', usedEmployeeEmails);
+      const githubProfile = engineerAnswer.engineerGithub.trim();
+      if (!githubProfile.includes('/')) {
+        // If there's no '/', assume only the github profile name was supplied ...
+        engineerAnswer.engineerGithub = `https://github.com/${githubProfile}`;
+      }
+
       usedGithubProfiles.push(engineerAnswer.engineerGithub.trim().toLowerCase());
       console.log('usedGithubProfiles:', usedGithubProfiles);
       
