@@ -182,56 +182,36 @@ const init = async () => {
   const internAnswers = [];
 
   const managerAnswer = await inquirer.prompt(managerQuestions);
-  console.log('managerAnswer:', JSON.stringify(managerAnswer, null, 2));
   usedEmployeeNames.push(managerAnswer.managerName.trim().toLowerCase());
-  console.log('usedEmployeeNames:', usedEmployeeNames);
   usedEmployeeIds.push(managerAnswer.managerId.trim().toLowerCase());
-  console.log('usedEmployeeIds:', usedEmployeeIds);
   usedEmployeeEmails.push(managerAnswer.managerEmail.toLowerCase());
-  console.log('usedEmployeeEmails:', usedEmployeeEmails);
 
   let loopAnswer;
 
   do {
     loopAnswer = await inquirer.prompt(loopQuestion);
-    console.log('loopAnswer:', JSON.stringify(loopAnswer, null, 2));
 
     if (loopAnswer.whatToDoNext === 'Add Engineer') {
       const engineerAnswer = await inquirer.prompt(engineerQuestions);
-      console.log('engineerAnswer:', JSON.stringify(engineerAnswer, null, 2));
       engineerAnswers.push(engineerAnswer);
       usedEmployeeNames.push(engineerAnswer.engineerName.trim().toLowerCase());
-      console.log('usedEmployeeNames:', usedEmployeeNames);
       usedEmployeeIds.push(engineerAnswer.engineerId.trim().toLowerCase());
-      console.log('usedEmployeeIds:', usedEmployeeIds);
       usedEmployeeEmails.push(engineerAnswer.engineerEmail.toLowerCase());
-      console.log('usedEmployeeEmails:', usedEmployeeEmails);
       const githubProfile = engineerAnswer.engineerGithub.trim();
       if (!githubProfile.includes('/')) {
         // If there's no '/', assume only the github profile name was supplied ...
         engineerAnswer.engineerGithub = `https://github.com/${githubProfile}`;
       }
-
       usedGithubProfiles.push(engineerAnswer.engineerGithub.trim().toLowerCase());
-      console.log('usedGithubProfiles:', usedGithubProfiles);
-      
+
     } else if (loopAnswer.whatToDoNext === 'Add Intern') {
       const internAnswer = await inquirer.prompt(internQuestions);
-      console.log('internAnswer:', JSON.stringify(internAnswer, null, 2));
       internAnswers.push(internAnswer);
       usedEmployeeNames.push(internAnswer.internName.trim().toLowerCase());
-      console.log('usedEmployeeNames:', usedEmployeeNames);
       usedEmployeeIds.push(internAnswer.internId.trim().toLowerCase());
-      console.log('usedEmployeeIds:', usedEmployeeIds);
       usedEmployeeEmails.push(internAnswer.internEmail.toLowerCase());
-      console.log('usedEmployeeEmails:', usedEmployeeEmails);
     }
   } while (loopAnswer.whatToDoNext !== 'Generate Team Profile');
-
-  console.log('Ready to Generate Team Profile!');
-  console.log('managerAnswer:\n', JSON.stringify(managerAnswer, null, 2));
-  console.log('engineerAnswers:\n', JSON.stringify(engineerAnswers, null, 2));
-  console.log('internAnswers:\n', JSON.stringify(internAnswers, null, 2));
 
   const officeManager = new Manager(
     managerAnswer.managerName,
