@@ -31,7 +31,7 @@ Type the following from a terminal window:
 ### Link to instructional video
 
 
-[Link to sample HTML that was generated using the application](./dist/index.html)
+[Link to sample HTML that was generated using the application](./index.html)
 
 
 
